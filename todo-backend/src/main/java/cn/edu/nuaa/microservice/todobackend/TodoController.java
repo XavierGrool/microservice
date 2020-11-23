@@ -5,7 +5,9 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -25,9 +27,24 @@ public class TodoController {
         return t;
     }
 
+    @PutMapping(path="/tick")
+    public Todo tickTodo (@RequestParam Integer id) {
+        Todo t = todoRepository.findById(id).get();
+        t.setStatus(1 - t.getStatus());
+        todoRepository.save(t);
+        return t;
+    }
+
     @GetMapping(path="/all")
     public Iterable<Todo> getAllTodos() {
         return todoRepository.findAll();
+    }
+
+    @DeleteMapping(path="/delete")
+    public Todo deleteTodo (@RequestParam Integer id) {
+        Todo t = todoRepository.findById(id).get();
+        todoRepository.delete(t);
+        return t;
     }
 
 }
