@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+    todo_mysql:
+        image: mysql:5.6
+        networks:
+          - todo-net
+        environment:
+            MYSQL_ROOT_PASSWORD: "123456"
+            MYSQL_DATABASE: "db_todo"
+        ports:
+          - "3306:3306"
+    
+    todo_backend:
+        image: my-maven:3.6.3-jdk-8-ali
+        networks:
+          - todo-net
+          - public-net
+        volumes:
+          - "C:\\Users\\yinzi\\Desktop\\microservice\\todo-backend:/root/app"
+          - "C:\\Users\\yinzi\\Desktop\\.m2:/root/.m2"
+        ports:
+          - "9001:9001"
+        command: mvn -f /root/app spring-boot:run
+
+networks:
+    todo-net:
+    public-net:
+      external: true
