@@ -4,7 +4,7 @@ services:
     my_server:
         image: my-maven:3.6.3-jdk-8-ali
         networks:
-          - my_test
+          - public-net
         volumes:
           - "C:\\Users\\yinzi\\Desktop\\microservice\\eureka-server:/root/app"
           - "C:\\Users\\yinzi\\Desktop\\.m2:/root/.m2"
@@ -13,5 +13,5 @@ services:
         command: mvn -f /root/app spring-boot:run
 
 networks:
-    my_test:
+    public-net:
       external: true
