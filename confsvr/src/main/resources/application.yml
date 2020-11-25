@@ -1,0 +1,15 @@
+server:
+  port: 9003
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: file:/root/app/src/main/resources/config
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://172.18.0.2:8761/eureka/
