@@ -9,12 +9,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.beans.factory.annotation.Value;
 
+@CrossOrigin
+@RefreshScope
 @RestController
 public class TodoController {
 
     @Autowired
     private TodoRepository todoRepository;
+
+    @Value("${message:Hello default}")
+    private String message;
+
+    @RequestMapping("/message")
+    String getMessage() {
+        return this.message;
+    }
 
     @PostMapping(path="/add")
     public Todo addTodo (@RequestParam Integer user_id, @RequestParam String content) {
