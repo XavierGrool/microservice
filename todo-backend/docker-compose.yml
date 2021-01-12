@@ -12,7 +12,7 @@ services:
           - "3306:3306"
     
     todo_backend:
-        image: my-maven:3.6.3-jdk-8-ali
+        image: xaviergrool/self-made:maven-3.6.3-jdk8-ali
         networks:
           - todo-net
           - public-net
