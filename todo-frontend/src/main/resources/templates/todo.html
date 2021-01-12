@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Todo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<style>
+    .whole{
+    	position:relative;
+     	left:50%;
+     	float:left;
+    }
+	.box{
+    	position:relative; 
+     	left:-50%;
+        margin:50px;
+    }
+</style>
+
+<div class="whole">
+    <div class="box">
+        <form action="#" th:action="@{/todo-frontend/add}" th:object="${todo}" method="post">
+			Add something:<br>
+            <input type="text" name="content" th:field="*{content}"/>
+			<br>
+			<input type="submit" value="Add">
+        </form>
+
+        <br>
+        
+        <table th:each="single_todo : ${todos}">
+            <tr>
+                <input th:if="${single_todo.getStatus()==1}" type="checkbox" checked>
+                <input th:if="${single_todo.getStatus()==0}" type="checkbox">
+                <span th:if="${single_todo.getStatus()==1}" style="text-decoration:line-through;" th:text="${single_todo.getContent()}">do something</span>
+                <span th:if="${single_todo.getStatus()==0}" th:text="${single_todo.getContent()}">do something</span>
+                <input type="submit" value="delete">
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="./todo.js"></script>
+
+</body>
+</html>
